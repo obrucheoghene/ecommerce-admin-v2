@@ -58,7 +58,7 @@ const StoreModal = () => {
                 )} />
                 <div className="pt-6 space-x-2 flex items-center justify-end w-full">
                   <Button variant="outline" onClick={storeModal.onClose}>Cancel</Button>
-                  <Button type="submit" >Continue</Button>
+                  <Button type="submit">Continue</Button>
                 </div>
             </form>
           </Form>
