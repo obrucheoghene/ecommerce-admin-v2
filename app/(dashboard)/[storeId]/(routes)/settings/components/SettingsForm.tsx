@@ -8,6 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useParams, useRouter } from "next/navigation";
+import axios from "axios";
+
 
 import { Heading } from "@/components/Heading"
 import { Button } from "@/components/ui/button"
@@ -15,8 +17,9 @@ import { Separator } from "@/components/ui/separator";
 import { Form, FormControl, FormField, FormItem,
     FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import axios from "axios";
 import { AlertModal } from "@/components/modal/AlertModal";
+import { ApiAlert } from "@/components/ApiAlert";
+import { useOrigin } from "@/hooks/useOrigin";
 
 
 interface SettingsFormProps {
@@ -34,6 +37,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
 }) => {
     const  params = useParams();
     const router = useRouter();
+    const origin = useOrigin()
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const form = useForm<SettingsFormValues>({
@@ -110,6 +114,9 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({
             <Button disabled={loading} className="ml-auto" type="submit">Save changes</Button>
         </form>
      </Form>
+
+     <Separator/>
+    <ApiAlert title="NEXT_PUBLIC_API_URL" description={`${origin}/api/${params.storeId}`} variant="public"/>
   </>
   )
 }
